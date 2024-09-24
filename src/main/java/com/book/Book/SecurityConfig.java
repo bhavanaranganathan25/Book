@@ -31,7 +31,8 @@ public class SecurityConfig {
                 		.requestMatchers("/auth/signup").permitAll() 
                         .requestMatchers("/auth/token").permitAll()
                         .requestMatchers("/admin/hello").hasRole("ADMIN")
-                         .anyRequest().authenticated()
+                        .requestMatchers("book/add").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
