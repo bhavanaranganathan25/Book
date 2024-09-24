@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/book/allBook").hasRole("ADMIN")
                         .requestMatchers("/book/getByIsbn/{isbn}").hasRole("ADMIN")
                         .requestMatchers("/book/update/{bid}").hasRole("ADMIN")
+                        .requestMatchers("/book/delete/{isbn}").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
