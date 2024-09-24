@@ -1,5 +1,6 @@
 package com.book.Book.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Book {
 	
 	private String author;
 	
+	@Column(unique = true)
 	private String isbn;
 	
 	private String publishedYear;
