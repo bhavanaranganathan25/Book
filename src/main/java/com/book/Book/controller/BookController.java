@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.book.Book.exception.InvalidIdException;
 import com.book.Book.exception.InvalidIsbnException;
 import com.book.Book.model.Book;
 import com.book.Book.service.BookService;
@@ -42,7 +44,19 @@ public class BookController {
 		} catch (InvalidIsbnException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
+		
 		}
+	
+	@PutMapping("/update/{bid}")
+	public void updateBook(@PathVariable int bid,@RequestBody Book book){
+		try {
+		      bookService.updateBook(bid,book);
+			
+		} catch (InvalidIdException e) {
+			 e.getMessage();
+		}
+		
+	}
 	
 	
 
