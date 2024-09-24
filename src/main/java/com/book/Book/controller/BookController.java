@@ -3,12 +3,15 @@ package com.book.Book.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.book.Book.exception.InvalidIsbnException;
 import com.book.Book.model.Book;
 import com.book.Book.service.BookService;
 
@@ -31,7 +34,15 @@ public class BookController {
 		return bookService.allBook();
 	}
 	
-	
+	@GetMapping("/getByIsbn/{isbn}")
+	public ResponseEntity<?> getByIsbn(@PathVariable String isbn){
+		try {
+			Book book= bookService.getBookByIsbn(isbn);
+			return ResponseEntity.ok(book);
+		} catch (InvalidIsbnException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		}
 	
 	
 
